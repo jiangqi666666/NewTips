@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+	<class name="com.jiangqi.newtips.online.context.checkrule.CheckParametes" identity="paramId" auto-complete="true">
+		<map-to xml="CheckParametes" />
+		<field name="paramId" type="string">
+			<bind-xml name="paramId" node="element" />
+		</field>
+		<field name="bean" type="string">
+			<bind-xml name="bean" node="element" />
+		</field>
+	</class>
+</mapping>

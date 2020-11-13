@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean id="msgParse" class="com.jiangqi.newtips.serialize.MessageParse" />
+        
+    <bean id="marshaller1001" class="org.springframework.oxm.castor.CastorMarshaller">
+          <property name="mappingLocation" value="classpath:/castor/1001.xml" />
+    </bean>
+    
+    <bean id="test" class="org.springframework.oxm.castor.CastorMarshaller">
+          <property name="mappingLocation" value="classpath:/castor/checkrule/checkrule.xml" />
+    </bean>
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="msgParse" class="com.jiangqi.newtips.serialize.MessageParse">
+		<property name="hander">
+			<map key-type="java.lang.String"
+				value-type="org.springframework.oxm.xstream.XStreamMarshaller">
+				<entry key="marshaller3001" value-ref="marshaller3001" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="marshaller3001"
+		class="org.springframework.oxm.xstream.XStreamMarshaller"
+		scope="prototype">
+		<property name="autodetectAnnotations" value="true" />
+		<property name="streamDriver" ref="driver" />
+		<property name="encoding" value="GBK" />
+		<property name="aliases">
+			<map>
+				<entry key="CFX" value="com.jiangqi.newtips.pojo.trade.Trade3001" />
+				<entry key="HEAD" value="com.jiangqi.newtips.pojo.trade.Head" />
+				<entry key="MSG" value="com.jiangqi.newtips.pojo.trade.Msg3001" />
+				<entry key="TaxTypeList3001"
+					value="com.jiangqi.newtips.pojo.trade.TaxTypeList3001" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="driver" class="com.thoughtworks.xstream.io.xml.Dom4JDriver" />
+	
+	<bean id="errorHandler" class="org.dom4j.util.XMLErrorHandler" />
+</beans>

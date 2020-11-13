@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	<!-- 引入jedis配置文件 -->
+	<context:property-placeholder location="classpath:/properties/redis.properties"
+		ignore-unresolvable="true" />
+	
+	<dubbo:application name="jq-consumer" owner="jiangqi" organization="jiangqi"/>
+    <dubbo:registry address="zookeeper://${zk.host}:2181"/>
+    
+    <dubbo:consumer timeout="30000" check="false" />
+    <dubbo:protocol name="dubbo" serialization="kryo"/>
+ 	
+ 	<dubbo:reference id="testService" interface="com.jiangqi.newtips.rules.api.TestService" async="true" />
+ 	<dubbo:reference id="remoteDubboService" interface="com.jiangqi.newtips.rules.api.BussinessRuleService" async="true"/>
+	<dubbo:reference id="msgHandleService" interface="com.jiangqi.newtips.rules.api.MsgHandleService" >
+		<dubbo:method name="advancedMsg3001" async="true" return="false"></dubbo:method>
+	</dubbo:reference>
+	<dubbo:reference id="macManagerService" interface="com.jiangqi.newtips.rules.api.MacManagerService"/>
+	<dubbo:reference id="schemaVerifyService" interface="com.jiangqi.newtips.rules.api.SchemaVerifyService" async="true" />
+</beans>

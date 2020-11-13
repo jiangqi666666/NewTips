@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean id="ttt"
+		class="dom4jtest.TTT">
+		<property name="xsdFileName" value="classpath:/test/1001.xsd"></property>
+		<property name="xmlFileName" value="classpath:/test/test.xml"></property>
+	</bean>
+
+</beans>
+
+

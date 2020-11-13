@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="onlieInfoResource"
+		class="com.jiangqi.newtips.serialize.online.onlieinfo.OnlieInfoResource">
+		<property name="test" value="classpath:/test/test.xml"></property>
+		<property name="checkRule" value="classpath:/onlineinfo/checkrule.xml"></property>
+		<property name="tradeFlow" value="classpath:/onlineinfo/tradeflow.xml"></property>
+		<property name="queueNode" value="classpath:/onlineinfo/queueNode.xml"></property>
+	</bean>
+
+	<bean id="msgParse" class="com.jiangqi.newtips.serialize.MessageParse">
+		<property name="hander">
+			<map key-type="java.lang.String"
+				value-type="org.springframework.oxm.xstream.XStreamMarshaller">
+				<entry key="marshaller1001" value-ref="marshaller1001" />
+				<entry key="marshaller9120" value-ref="marshaller9120" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="queueNodeMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<property name="autodetectAnnotations" value="true" />
+		<property name="streamDriver" ref="driver" />
+		<property name="aliases">
+			<map>
+				<entry key="QueueNodeMap"
+					value="com.jiangqi.newtips.serialize.online.onlieinfo.QueueNodeMap" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="tradeFlowMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<property name="autodetectAnnotations" value="true" />
+		<property name="streamDriver" ref="driver" />
+		<property name="aliases">
+			<map>
+				<entry key="map"
+					value="com.jiangqi.newtips.serialize.online.traderoute.TradeFlowMap" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="checkRuleMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<property name="autodetectAnnotations" value="true" />
+		<property name="streamDriver" ref="driver" />
+		<property name="aliases">
+			<map>
+				<entry key="all"
+					value="com.jiangqi.newtips.serialize.online.checkrule.AllCheckRuleMap" />
+				<entry key="trade"
+					value="com.jiangqi.newtips.serialize.online.checkrule.TradeRuleMap" />
+				<entry key="group"
+					value="com.jiangqi.newtips.serialize.online.checkrule.CheckGroupMap" />
+				<entry key="rule"
+					value="com.jiangqi.newtips.serialize.online.checkrule.CheckRule" />
+				<entry key="param"
+					value="com.jiangqi.newtips.serialize.online.checkrule.CheckParametes" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="marshaller1001" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<property name="autodetectAnnotations" value="true" />
+		<property name="streamDriver" ref="driver" />
+		<property name="encoding" value="GBK" />
+		<property name="aliases">
+			<map>
+				<entry key="CFX" value="com.jiangqi.newtips.pojo.trade.Trade1001" />
+				<entry key="HEAD" value="com.jiangqi.newtips.pojo.trade.Head" />
+				<entry key="MSG" value="com.jiangqi.newtips.pojo.trade.Msg1001" />
+				<entry key="TaxTypeList1001"
+					value="com.jiangqi.newtips.pojo.trade.TaxTypeList1001" />
+				<entry key="TaxSubjectList1001"
+					value="com.jiangqi.newtips.pojo.trade.TaxSubjectList1001" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="marshaller9120" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<property name="autodetectAnnotations" value="true" />
+		<property name="streamDriver" ref="driver" />
+		<property name="encoding" value="GBK" />
+		<property name="aliases">
+			<map>
+				<entry key="CFX" value="com.jiangqi.newtips.pojo.trade.Trade9120" />
+				<entry key="HEAD" value="com.jiangqi.newtips.pojo.trade.Head" />
+				<entry key="MSG" value="com.jiangqi.newtips.pojo.trade.MsgReturn9120" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="driver" class="com.thoughtworks.xstream.io.xml.Dom4JDriver" />
+</beans>

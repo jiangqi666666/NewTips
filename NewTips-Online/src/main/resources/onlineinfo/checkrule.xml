@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<all>
+	<trades>
+		<entry>
+			<string>1001</string>
+			<trade tradeId="1001">
+				<remotegroup>
+					<group groupId="group1">
+						<rules>
+							<rule ruleId="rule1">
+								<params>
+									<param paramId="a" bean="${bean.head.ver}"/>
+									<param paramId="aa" bean="${bean.head.ver}"/>
+								</params>
+							</rule>
+							<rule ruleId="rule2">
+								<params>
+									<param paramId="a" bean="${bean.head.ver}"/>
+								</params>
+							</rule>
+						</rules>
+					</group>
+					<group groupId="group2">
+						<rules>
+							<rule ruleId="rule3">
+								<params>
+									<param paramId="a" bean="${bean.head.ver}"/>
+									<param paramId="b" bean="${bean.head.ver}"/>
+								</params>
+							</rule>
+						</rules>
+					</group>
+				</remotegroup>
+				<localgroup>
+					<rule ruleId="rule1">
+						<params>
+							<param paramId="a" bean="${bean.head.ver}"/>
+							<param paramId="b" bean="${bean.head.ver}"/>
+						</params>
+					</rule>
+					<rule ruleId="rule2">
+						<params>
+							<param paramId="a" bean="${bean.head.ver}"/>
+						</params>
+					</rule>
+					<rule ruleId="rule3">
+						<params>
+							<param paramId="a" bean="${bean.head.ver}"/>
+							<param paramId="b" bean="${bean.head.ver}"/>
+						</params>
+					</rule>
+				</localgroup>
+			</trade>
+		</entry>
+		<entry>
+			<string>1002</string>
+			<trade tradeId="1002">
+				<remotegroup>
+					<group groupId="group1">
+						<rules>
+							<rule ruleId="rule1">
+								<params>
+									<param paramId="a" bean="${bean.head.ver}"/>
+									<param paramId="b" bean="${bean.head.ver}"/>
+								</params>
+							</rule>
+							<rule ruleId="testrule2">
+								<params>
+									<param paramId="a" bean="${bean.head.ver}"/>
+								</params>
+							</rule>
+						</rules>
+					</group>
+				</remotegroup>
+			</trade>
+		</entry>
+	</trades>
+</all>

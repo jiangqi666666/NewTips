@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+	<include href="traderule.xml" />
+	<class name="com.jiangqi.newtips.online.context.checkrule.AllCheckRuleMap" identity="tradeMaps" auto-complete="true">
+		<map-to xml="AllCheckRuleMap" />
+		<field name="tradeMaps" collection="map" type="com.jiangqi.newtips.online.context.checkrule.TradeRuleMap"  >
+			<bind-xml name="tradeMaps" node="element" />
+		</field>
+	</class>
+</mapping>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+	<include href="group.xml" />
+	<class name="com.jiangqi.newtips.online.context.checkrule.TradeRuleMap" identity="tradeId" auto-complete="true">
+		<map-to xml="TradeRuleMap" />
+		<field name="tradeId" type="string">
+			<bind-xml name="tradeId" node="element" />
+		</field>
+		<field name="group" collection="list" type="com.jiangqi.newtips.online.context.checkrule.CheckGroupMap">
+			<bind-xml name="group" node="element"  />
+		</field>
+	</class>
+</mapping>

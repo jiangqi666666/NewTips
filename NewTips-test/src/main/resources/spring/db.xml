@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+		
+	<context:annotation-config />
+
+	<!-- 引入jedis配置文件 -->
+	<context:property-placeholder location="classpath:/properties/db.properties"
+		ignore-unresolvable="true" />
+
+	<!-- 配置dbcp数据源 -->
+	<bean id="dbs1" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://192.168.3.101:3306/mango_1" />
+		<property name="username" value="root" />
+		<property name="password" value="111111" />
+		<!-- 池启动时创建的连接数量 -->
+		<property name="initialSize" value="5" />
+		<!-- 同一时间可以从池分配的最多连接数量。设置为0时表示无限制。 -->
+		<property name="maxActive" value="30" />
+		<!-- 池里不会被释放的最多空闲连接数量。设置为0时表示无限制。 -->
+		<property name="maxIdle" value="20" />
+		<!-- 在不新建连接的条件下，池中保持空闲的最少连接数。 -->
+		<property name="minIdle" value="3" />
+		<!-- 设置自动回收超时连接 -->
+		<property name="removeAbandoned" value="true" />
+		<!-- 自动回收超时时间(以秒数为单位) -->
+		<property name="removeAbandonedTimeout" value="200" />
+		<!-- 设置在自动回收超时连接的时候打印连接的超时错误 -->
+		<property name="logAbandoned" value="true" />
+		<!-- 等待超时以毫秒为单位，在抛出异常之前，池等待连接被回收的最长时间（当没有可用连接时）。设置为-1表示无限等待。 -->
+		<property name="maxWait" value="100" />
+	</bean>
+
+	<!-- 配置dbcp数据源 -->
+	<bean id="dbs2" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://192.168.3.101:3306/mango_2" />
+		<property name="username" value="root" />
+		<property name="password" value="111111" />
+		<!-- 池启动时创建的连接数量 -->
+		<property name="initialSize" value="5" />
+		<!-- 同一时间可以从池分配的最多连接数量。设置为0时表示无限制。 -->
+		<property name="maxActive" value="30" />
+		<!-- 池里不会被释放的最多空闲连接数量。设置为0时表示无限制。 -->
+		<property name="maxIdle" value="20" />
+		<!-- 在不新建连接的条件下，池中保持空闲的最少连接数。 -->
+		<property name="minIdle" value="3" />
+		<!-- 设置自动回收超时连接 -->
+		<property name="removeAbandoned" value="true" />
+		<!-- 自动回收超时时间(以秒数为单位) -->
+		<property name="removeAbandonedTimeout" value="200" />
+		<!-- 设置在自动回收超时连接的时候打印连接的超时错误 -->
+		<property name="logAbandoned" value="true" />
+		<!-- 等待超时以毫秒为单位，在抛出异常之前，池等待连接被回收的最长时间（当没有可用连接时）。设置为-1表示无限等待。 -->
+		<property name="maxWait" value="100" />
+	</bean>
+
+	<!-- 配置数据源工厂 -->
+	<bean id="ds1" class="org.jfaster.mango.datasource.SimpleDataSourceFactory">
+		<constructor-arg type="javax.sql.DataSource" ref="dbs1">
+		</constructor-arg>
+	</bean>
+	<bean id="ds2" class="org.jfaster.mango.datasource.SimpleDataSourceFactory">
+		<constructor-arg type="javax.sql.DataSource" ref="dbs2">
+		</constructor-arg>
+	</bean>
+
+	<bean id="dsf" class="org.jfaster.mango.datasource.MultipleDataSourceFactory">
+		<property name="factories">
+			<map key-type="java.lang.String" value-type="org.jfaster.mango.datasource.DataSourceFactory">
+				<entry key="ds1" value-ref="ds1" />
+				<entry key="ds2" value-ref="ds2" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- 配置mango对象 -->
+	<bean id="mango" class="org.jfaster.mango.operator.Mango"
+		factory-method="newInstance">
+		<property name="dataSourceFactory" ref="dsf" />
+	</bean>
+	
+	<!-- 配置扫描使用@DB注解修饰的DAO类 -->
+    <bean class="org.jfaster.mango.plugin.spring.MangoDaoScanner">
+        <property name="packages">
+            <list>
+                <!-- 扫描包名 -->
+                <value>dbtest.spring</value>
+                <!-- <value>其他需要扫描的包</value> -->
+            </list>
+        </property>
+    </bean>
+
+	<bean id="testServiceImpl" class="dbtest.service.TestServiceImpl">
+	</bean>
+</beans>

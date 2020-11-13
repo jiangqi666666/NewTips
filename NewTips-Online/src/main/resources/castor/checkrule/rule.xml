@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+	<include href="param.xml" />
+	<class name="com.jiangqi.newtips.online.context.checkrule.CheckRule" identity="ruleId" auto-complete="true">
+		<map-to xml="CheckRule" />
+		<field name="ruleId" type="string">
+			<bind-xml name="ruleId" node="element" />
+		</field>
+		<field name="param" collection="list" type="com.jiangqi.newtips.online.context.checkrule.CheckParametes">
+			<bind-xml name="param" node="element" />
+		</field>
+	</class>
+</mapping>

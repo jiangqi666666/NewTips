@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+        <class name="com.jiangqi.newtips.online.pojo.tarde.Trade1001">
+           <map-to xml="test"/>
+           <field name="a" type="string">
+              <bind-xml name="a" node="element"/>
+           </field>
+           <field name="b" type="int">
+              <bind-xml name="b" node="element"/>
+           </field>
+        </class>
+</mapping>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ - Copyright 1999-2011 Alibaba Group.
+ -  
+ - Licensed under the Apache License, Version 2.0 (the "License");
+ - you may not use this file except in compliance with the License.
+ - You may obtain a copy of the License at
+ -  
+ -      http://www.apache.org/licenses/LICENSE-2.0
+ -  
+ - Unless required by applicable law or agreed to in writing, software
+ - distributed under the License is distributed on an "AS IS" BASIS,
+ - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ - See the License for the specific language governing permissions and
+ - limitations under the License.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	<context:annotation-config />
+	
+	<!-- 引入jedis配置文件 -->
+	<context:property-placeholder location="classpath:/META-INF/properties/redis.properties"
+		ignore-unresolvable="true" />
+		
+	
+    <dubbo:application name="demo-provider" owner="programmer" organization="dubbox"/>
+    <dubbo:registry address="zookeeper://${zk.host}:2181"/>
+    <dubbo:protocol name="dubbo" serialization="kryo"/>
+
+    <dubbo:service interface="com.jiangqi.newtips.rules.api.BussinessRuleService" ref="bussinessRuleImp"  protocol="dubbo" />
+    <dubbo:service interface="com.jiangqi.newtips.rules.api.MsgHandleService" ref="msgHandleServiceImpl"  protocol="dubbo" />
+    <dubbo:service interface="com.jiangqi.newtips.rules.api.MacManagerService" ref="macManagerServiceImpl"  protocol="dubbo" />
+    <dubbo:service interface="com.jiangqi.newtips.rules.api.SchemaVerifyService" ref="schemaVerifyServiceImpl"  protocol="dubbo" />
+    
+    <bean id="bussinessRuleImp"
+    	class="com.jiangqi.newtips.rules.service.BussinessRuleServiceImpl"/>
+    
+    <bean id="msgHandleServiceImpl"
+    	class="com.jiangqi.newtips.rules.service.MsgHandleServiceImpl"/>
+
+    <bean id="macManagerServiceImpl"
+    	class="com.jiangqi.newtips.rules.service.MacManagerServiceImpl"/>
+
+    <bean id="context"
+    	class="com.jiangqi.newtips.util.ApplicationContextUtil"/>
+    	
+    <bean id="createMsg"
+    	class="com.jiangqi.newtips.util.CreateMsg"/>
+    
+    <!-- <bean id="schemaVerifyServiceImpl" class="com.jiangqi.newtips.rules.service.SchemaVerifyServiceImpl">
+		<property name="schemaFile">
+			<map key-type="java.lang.String" value-type="org.springframework.core.io.Resource">
+				<entry key="1001" value="classpath:/schema/1001.xsd" />
+			</map>
+		</property>
+	</bean> -->
+	
+	<bean id="schemaVerifyServiceImpl" class="com.jiangqi.newtips.rules.service.SchemaVerifyServiceImpl">
+		<property name="xsdFileName" value="classpath:/schema/1001.xsd"></property>
+	</bean> 
+	
+</beans>

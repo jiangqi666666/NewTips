@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QueueNodeMap>
+  <entry>
+    <string>000000000000</string>
+    <string>queueRet</string>
+  </entry>
+  <entry>
+    <string>202100000010</string>
+    <string>queueRet</string>
+  </entry>
+  <entry>
+    <string>100000000000</string>
+    <string>queueBank</string>
+  </entry>
+</QueueNodeMap>

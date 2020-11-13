@@ -1,0 +1,19 @@
+hset TreCodeEntity.0100000000 ReckonTreCode "011100000003"
+hset TipsSysEntity WorkDate 2016-05-01
+hset BankEntity.402100000018  NodeCode "200000000010"
+
+
+select count(*) from tips_1.VOUCHERSEND1001_0;
+select count(*) from tips_1.VOUCHERSTAT1001_0;
+
+select count(*) from tips_1.VOUCHERSEND1001_1;
+select count(*) from tips_1.VOUCHERSTAT1001_1;
+
+select count(*) from tips_1.VOUCHERSEND1001_2;
+select count(*) from tips_1.VOUCHERSTAT1001_2;
+
+select count(*) from tips_2.VOUCHERSEND1001_3;
+select count(*) from tips_2.VOUCHERSTAT1001_3;
+
+select count(*) from tips_2.VOUCHERSEND1001_4;
+select count(*) from tips_2.VOUCHERSTAT1001_4;

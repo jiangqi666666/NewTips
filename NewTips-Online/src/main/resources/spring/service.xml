@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean id="createMsg" class="com.jiangqi.newtips.util.CreateMsg" />
+
+	<bean id="localBussinessRuleService"
+		class="com.jiangqi.newtips.online.services.LocalBussinessRuleService" />
+
+	<bean id="tradeKeyService" class="com.jiangqi.newtips.online.services.TradeKeyService">
+		<property name="redisClient" ref="redisClient"></property>
+	</bean>
+
+	<bean id="checkRuleService" class="com.jiangqi.newtips.online.services.CheckRuleService" />
+
+	<bean id="msg9120Service" class="com.jiangqi.newtips.online.services.Msg9120Service" />
+
+	<bean id="sendMsgService" class="com.jiangqi.newtips.online.services.SendMsgService">
+		<property name="messageWork" ref="messageWork"></property>
+	</bean>
+
+	<bean id="remoteBussinessRuleService"
+		class="com.jiangqi.newtips.online.services.RemoteBussinessRuleService">
+		<property name="rule" ref="remoteDubboService"></property>
+	</bean>
+
+	<bean id="paramSelectService" class="com.jiangqi.newtips.online.services.ParamSelectService">
+		<property name="redisClient" ref="redisClient"></property>
+	</bean>
+	<bean id="msg3001Service" class="com.jiangqi.newtips.online.services.Msg3001Service">
+		<property name="redisClient" ref="redisClient"></property>
+		<property name="createMsg" ref="createMsg"></property>
+		<property name="macManagerService" ref="macManagerService"></property>
+	</bean>
+
+	
+
+</beans>
