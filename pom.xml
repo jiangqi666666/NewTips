@@ -384,11 +384,6 @@
 		</developer>
 	</developers>
 	<modules>
-
-
-
-
-
 		<module>NewTips-Util</module>
 		<module>NewTips-BusniessRule-Api</module>
 		<module>NewTips-Online</module>
